@@ -1,5 +1,6 @@
 import './App.css';
 import Dropdown from './Dropdown';
+import SearchBar from './SearchBar'
 import axios from 'axios'
 import React, { useState, useEffect } from 'react';
 import { Credentials } from './Credentials';
@@ -7,13 +8,12 @@ import { Credentials } from './Credentials';
 function App() {
 
     const spotify = Credentials();
-    const data = [
-        {value: 1, name: 'A'},
-        {value: 2, name: 'B'},
-        {value: 3, name: 'C=A'}
-    ]
-
+    const resultLimit = 10;
+    const resultType = 'artist,album,track';
     const [token, setToken] = useState('');
+
+    const[searchQuery, setSearchQuery] = useState('');
+    const[searchResult, setSearchResult] = useState("[]");
 
     useEffect(() => {
         axios('https://accounts.spotify.com/api/token', {
@@ -30,11 +30,20 @@ function App() {
         })
     }, [])
 
+    useEffect(() => {
+        axios(`https://api.spotify.com/v1/search?q=${searchQuery}&limit=${resultLimit}&type=${resultType}`, {
+            method: 'GET',
+            headers: {'Authorization' : 'Bearer ' + token}
+        })
+        .then(apiSearchResults => {
+            setSearchResult(apiSearchResults.toString());
+        })
+    }, [searchQuery]) 
+
     return (
         <form onSubmit={() => {}}>
             <div className="App">
-                <Dropdown options={data}/>
-                <button type='submit'>Search</button>
+                <SearchBar search={searchQuery} result={searchResult} setSearchQuery={setSearchQuery}/>
             </div>
         </form>
         
