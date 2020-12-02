@@ -1,5 +1,6 @@
 import './App.css';
 import SearchBar from './Search/SearchBar'
+import SearchList from './Search/SearchList'
 import axios from 'axios'
 import React, { useState, useEffect } from 'react';
 import { Credentials } from './Credentials';
@@ -58,6 +59,7 @@ function App() {
         <form onSubmit={() => {}}>
             <div className="App">
                 <SearchBar search={searchQuery} result={searchResult} setSearchQuery={setSearchQuery}/>
+                { searchResult.tracks.length + searchResult.artists.length + searchResult.albums.length ? <SearchList results={searchResult} /> : ""}
             </div>
         </form>
         

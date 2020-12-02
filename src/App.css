@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin:0;
 }
 
 .App-logo {
@@ -41,12 +42,28 @@
   align-items: center;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
 }
 
 .search-name {
   align-items: flex-end;
-  display: grid;
+  justify-content: center;
+  display: block;
   flex-direction: column;
-  margin: 0cm;
+}
+
+.artist-image {
+  display: block;
+  max-width:64px;
+  max-height:64px;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 50%;
+}
+
+.search-results {
+  display: grid;
+  background-color: rgb(44, 44, 44);
+  color: white;
+  grid-template-columns: 1fr 1fr 1fr;
 }

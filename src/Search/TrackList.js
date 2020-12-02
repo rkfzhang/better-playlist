@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup, ListGroupItem, Image } from 'react-bootstrap';
+import {Image, Col, Row } from 'react-bootstrap';
 
 const TrackList = props => {
  
@@ -7,22 +7,19 @@ const TrackList = props => {
 
     return tracks.length ?
         (<div>
-            <h1>Tracks</h1>
-            <ListGroup>
+            <h2>Tracks</h2>
                 {tracks.map( (t) => 
-                <div>
-                    <ListGroupItem>
-                        <div className='search-container'>
-                            <Image src={t.album.images[2].url}></Image>
-                            <div className='search-name'> 
-                                <h2>{t.name}</h2>
-                                <p>{t.artists[0].name}</p>
-                            </div>
+                <Row>
+                    <div className='search-container'>
+                        <Image src={t.album.images.length ? t.album.images[t.album.images.length-1].url : ""} rounded />
+                        <div className='search-name'> 
+                            <h3>{t.name}</h3>
+                            <p>{t.artists[0].name}</p>
                         </div>
-                    </ListGroupItem>
-                </div>)}
-            </ListGroup>
+                    </div>
+                </Row>)}
         </div>) : "";
 }
 
 export default TrackList;
+//onclick
