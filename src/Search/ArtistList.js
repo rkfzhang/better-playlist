@@ -11,7 +11,7 @@ const ArtistList = props => {
                 {artists.map( (a) => 
                 <Row>
                     <div className='search-container'>
-                        <Image className='artist-image' src={a.images.length ? a.images[a.images.length-1].url : ""}  roundedCircle/>
+                        {a.images.length ? <Image className='artist-image' src={a.images[a.images.length-1].url} /> : "" }
                         <div className='search-name'> 
                             <h3>{a.name}</h3>
                         </div>

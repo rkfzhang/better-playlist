@@ -11,7 +11,7 @@ const TrackList = props => {
                 {tracks.map( (t) => 
                 <Row>
                     <div className='search-container'>
-                        <Image src={t.album.images.length ? t.album.images[t.album.images.length-1].url : ""} rounded />
+                        {t.album.images.length ? <Image src={t.album.images[t.album.images.length-1].url} rounded /> : ""}
                         <div className='search-name'> 
                             <h3>{t.name}</h3>
                             <p>{t.artists[0].name}</p>

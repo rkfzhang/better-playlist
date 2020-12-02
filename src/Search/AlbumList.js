@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Col, Row } from 'react-bootstrap';
+import { Image, Row } from 'react-bootstrap';
 
 const ArtistList = props => {
  
@@ -11,7 +11,7 @@ const ArtistList = props => {
                 {albums.map( (a) => 
                 <Row>
                     <div className='search-container'>
-                        <Image src={a.images.length ? a.images[2].url : ""}  roundedCircle/>
+                        {a.images.length ?<Image src={a.images[2].url}  roundedCircle/> : ""}
                         <div className='search-name'> 
                             <h3>{a.name}</h3>
                             <p>{a.artists[0].name}</p>
