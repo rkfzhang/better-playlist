@@ -6,7 +6,9 @@
 .pnp.js
 
 # testing
-/coverage
+/test/*
+Credentials.js
+/src/Credentials.*
 
 # production
 /build
@@ -22,5 +24,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /pre
-Credentials.js
-src/Credentials.js
+
