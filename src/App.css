@@ -12,6 +12,15 @@
   overflow: auto;
 }
 
+.collection-section {
+  text-align: left;
+  margin-left: 20px;
+}
+
+.playlist-section {
+  background-color: rgb(17, 17, 17);
+}
+
 .search-results {
   display: grid;
   background-color: rgb(44, 44, 44);

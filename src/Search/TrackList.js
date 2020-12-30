@@ -1,16 +1,24 @@
 import React from 'react';
-import {Image, Col, Row } from 'react-bootstrap';
+import {Image, Row } from 'react-bootstrap';
 
 const TrackList = props => {
  
     var tracks = JSON.parse(props.results);
+
+    function addTrack(track) {
+        let playlist = props.playlist;
+        playlist.items.tracks = [...playlist.items.tracks, track];
+        
+        props.setSelectedPlaylist(playlist);
+        props.setSearchQuery('');
+    }
 
     return tracks.length ?
         (<div>
             <h2>Tracks</h2>
                 {tracks.map( (t) => 
                 <Row>
-                    <div className='search-container'>
+                    <div className='search-container' onClick={e => addTrack(t)}>
                         {t.album.images.length ? <Image src={t.album.images[t.album.images.length-1].url} rounded /> : ""}
                         <div className='search-name'> 
                             <h3>{t.name}</h3>
