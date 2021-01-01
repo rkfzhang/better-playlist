@@ -1,19 +1,33 @@
 import axios from 'axios';
 
 class ApiService {
-    getToken(spotify,setToken) {
-        axios('https://accounts.spotify.com/api/token', {
-            headers: {
-                'Content-Type' : 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa(spotify.ClientId + ':' + spotify.ClientSecret)
-            },
-            data: 'grant_type=client_credentials',
-            method: 'POST'
-        })
-        .then(tokenReponse => {
-            console.log(tokenReponse.data.access_token);
-            setToken(tokenReponse.data.access_token);
+
+    authorize() {
+        const client_id = '012ed053ecba4a58874cb8a2e753225a';
+        const redirect_uri = 'http://localhost:3000/';
+        const scopes = [
+            "user-read-currently-playing",
+            "user-read-recently-played",
+            "user-read-playback-state",
+            "user-top-read",
+            "user-modify-playback-state",
+        ];
+        const authorizeEndpoint = 'https://accounts.spotify.com/authorize';
+
+        const authorizeLink = `${authorizeEndpoint}?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scopes.join(
+            "%20"
+          )}&response_type=token&show_dialog=true`;
+
+        return authorizeLink
+    }
+
+    getToken(url) {
+        const urlComponets = url.substring(1).split("&");
+        let token = '';
+        urlComponets.forEach( c => {
+            if (c.startsWith('access_token')) token = c.substring(13);
         });
+        return token;
     }
 
     getSearchResults(searchQuery, token, setSearchResult) {

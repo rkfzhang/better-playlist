@@ -1,25 +1,19 @@
 import './App.css';
 import CollectionList from './Collection/CollectionList';
 import React, { useState, useEffect } from 'react';
-import { Credentials } from './Credentials';
 import Playlist from './Collection/Playlist';
-import { Button } from 'react-bootstrap';
+import Login from './Login';
 import { apiService } from './ApiService'
 
 function App() {
 
     /////////////////////////////////////////////////////////////////////////////////////
     //CREDENTIAS
-    const spotify = Credentials();
     const [token, setToken] = useState('');
 
-    const getToken = async () => {
-        const returnedToken = apiService.getToken(spotify,setToken);
-        return returnedToken;
-    }
-
     useEffect(() => {
-        getToken();
+        const retrievedToken = apiService.getToken(window.location.hash);
+        setToken(retrievedToken);
     }, [])
 
 
@@ -36,7 +30,7 @@ function App() {
             <Playlist selectedPlaylist={selectedPlaylist} setSelectedPlaylist={setSelectedPlaylist} token={token}/>
         </div>
         :
-        <Button className="App">Authorize</Button>
+        <Login authorizeUrl={apiService.authorize()}/>
         
     );
 }

@@ -11,8 +11,7 @@ const SearchController = props => {
     const[searchResult, setSearchResult] = useState({ tracks: [], albums: [], artists: [] });
 
     const getSearchResults = () => {
-        const returnedSearchResults = apiService.getSearchResults(searchQuery,props.token,setSearchResult);
-        return returnedSearchResults;
+        apiService.getSearchResults(searchQuery,props.token,setSearchResult);
     }
     useEffect(() => {
         setSearchResult(getSearchResults());

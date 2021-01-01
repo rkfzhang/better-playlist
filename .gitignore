@@ -7,8 +7,6 @@
 
 # testing
 /test/*
-Credentials.js
-/src/Credentials.*
 
 # production
 /build
@@ -25,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 /pre
 
+debug.log
+.eslintcache
