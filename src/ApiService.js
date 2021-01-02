@@ -11,6 +11,9 @@ class ApiService {
             "user-read-playback-state",
             "user-top-read",
             "user-modify-playback-state",
+            "streaming", 
+            "user-read-email", 
+            "user-read-private"
         ];
         const authorizeEndpoint = 'https://accounts.spotify.com/authorize';
 
