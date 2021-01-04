@@ -6,7 +6,7 @@ const ArtistList = props => {
     var albums = JSON.parse(props.results);
 
     function addAlbum(album) {
-        let playlist = props.playlist;
+        let playlist = props.selectedPlaylist;
         playlist.items.albums = [...playlist.items.albums, album];
         
         props.setSelectedPlaylist(playlist);

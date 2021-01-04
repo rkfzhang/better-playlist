@@ -41,7 +41,7 @@ const PlayController = props => {
 
 
     return (
-        <div>PLAYER</div>
+        <div className='player'>PLAYER Active</div>
     );
 }
 

@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Playlist from './Collection/Playlist';
 import Login from './Login';
 import { apiService } from './ApiService'
+import InactivePlayer from './Play/InactivePlayer';
+import PlayController from './Play/PlayController';
 
 function App() {
 
@@ -14,7 +16,7 @@ function App() {
     useEffect(() => {
         const retrievedToken = apiService.getToken(window.location.hash);
         setToken(retrievedToken);
-    }, [])
+    }, []);
 
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -24,14 +26,20 @@ function App() {
 
     /////////////////////////////////////////////////////////////////////////////////////
     //PAGE
-    return ( token ?
+    return ( 
         <div className="App">
-            <CollectionList setSelectedPlaylist={setSelectedPlaylist}/>
-            <Playlist selectedPlaylist={selectedPlaylist} setSelectedPlaylist={setSelectedPlaylist} token={token}/>
-        </div>
-        :
-        <Login authorizeUrl={apiService.authorize()}/>
-        
+            {token ?
+                <div className="App-Main">
+                    <CollectionList setSelectedPlaylist={setSelectedPlaylist}/>
+                    <Playlist selectedPlaylist={selectedPlaylist} setSelectedPlaylist={setSelectedPlaylist} token={token}/>
+                </div>
+                : <Login authorizeUrl={apiService.authorize()}/>
+            }
+            {token ? 
+                <PlayController token={token} /> 
+                : <InactivePlayer />
+            }
+        </div>  
     );
 }
 

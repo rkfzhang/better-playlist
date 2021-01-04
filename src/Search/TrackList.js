@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Image, Row } from 'react-bootstrap';
 
 const TrackList = props => {
@@ -6,7 +6,7 @@ const TrackList = props => {
     var tracks = JSON.parse(props.results);
 
     function addTrack(track) {
-        let playlist = props.playlist;
+        let playlist = props.selectedPlaylist;
         playlist.items.tracks = [...playlist.items.tracks, track];
         
         props.setSelectedPlaylist(playlist);

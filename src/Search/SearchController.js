@@ -12,12 +12,12 @@ const SearchController = props => {
 
     const getSearchResults = () => {
         apiService.getSearchResults(searchQuery,props.token,setSearchResult);
-    }
+    };
     useEffect(() => {
         setSearchResult(getSearchResults());
     }, [searchQuery]);
-    
-    
+
+
 
     return (
         <div className='search-section'>

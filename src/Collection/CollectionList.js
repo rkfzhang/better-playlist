@@ -36,7 +36,7 @@ const CollectionList = props => {
             <h2>Your Collection</h2>
             <div>
                 {collection.map( (d) => 
-                    <p key={d.index} data-index={d.index} onClick={e => changePlaylist(e.target.dataset.index)}>{d.name + " " + d.index}</p>)
+                    <p key={d.index} data-index={d.index} onClick={e => changePlaylist(e.target.dataset.index)}>{d.name}</p>)
                 }
             </div>
             {add ? 
@@ -44,7 +44,10 @@ const CollectionList = props => {
                     <Form.Group>
                         <Form.Control value={playlistName} onChange={e => setName(e.target.value)}/>
                     </Form.Group>
-                    <Button onClick={addNewPlaylist}>Add</Button>
+                    <div>
+                        <Button onClick={addNewPlaylist}>Add</Button>
+                        <Button onClick={() => {setAdd(!add)}}>Cancel</Button>
+                    </div>
                 </Alert> : ""
             }
             <Button onClick={() => {setAdd(!add)}}>Add Playlist</Button>

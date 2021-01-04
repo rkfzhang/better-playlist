@@ -2,12 +2,12 @@ import React from 'react';
 import PlaylistHeader from './PlaylistHeader';
 import PlaylistMain from './PlaylistMain';
 import SearchController from '../Search/SearchController';
-import PlayController from '../Play/PlayController';
 
 const Playlist = props => {
 
     /////////////////////////////////////////////////////////////////////////////////////
     //SEARCH
+    
 
     return (
         <div>
@@ -24,7 +24,6 @@ const Playlist = props => {
                     </div>
                 }
             </div>
-            <PlayController token={props.token} />
         </div>
     );
 }
