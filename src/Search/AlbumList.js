@@ -11,6 +11,7 @@ const ArtistList = props => {
         
         props.setSelectedPlaylist(playlist);
         props.setSearchQuery('');
+        props.setPlaylistChanged(true);
     }
 
     return albums.length ?

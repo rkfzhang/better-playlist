@@ -24,7 +24,7 @@ const SearchController = props => {
             <SearchBar search={searchQuery} result={searchResult} setSearchQuery={setSearchQuery}/>
             { searchResult ? 
                 <SearchList results={searchResult} selectedPlaylist={props.selectedPlaylist} 
-                setSelectedPlaylist={props.setSelectedPlaylist} setSearchQuery={setSearchQuery}/>
+                setSelectedPlaylist={props.setSelectedPlaylist} setSearchQuery={setSearchQuery} setPlaylistChanged={props.setPlaylistChanged}/>
                 : ""
             }
         </div>

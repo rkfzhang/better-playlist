@@ -11,6 +11,7 @@ const TrackList = props => {
         
         props.setSelectedPlaylist(playlist);
         props.setSearchQuery('');
+        props.setPlaylistChanged(true);
     }
 
     return tracks.length ?

@@ -6,6 +6,7 @@ import Login from './Login';
 import { apiService } from './ApiService'
 import InactivePlayer from './Play/InactivePlayer';
 import PlayController from './Play/PlayController';
+import AppMainController from './AppMainController';
 
 function App() {
 
@@ -18,21 +19,12 @@ function App() {
         setToken(retrievedToken);
     }, []);
 
-
-    /////////////////////////////////////////////////////////////////////////////////////
-    //PLAYLIST
-
-    const [selectedPlaylist, setSelectedPlaylist] = useState();
-
     /////////////////////////////////////////////////////////////////////////////////////
     //PAGE
     return ( 
         <div className="App">
             {token ?
-                <div className="App-Main">
-                    <CollectionList setSelectedPlaylist={setSelectedPlaylist}/>
-                    <Playlist selectedPlaylist={selectedPlaylist} setSelectedPlaylist={setSelectedPlaylist} token={token}/>
-                </div>
+                <AppMainController token={token} />
                 : <Login authorizeUrl={apiService.authorize()}/>
             }
             {token ? 

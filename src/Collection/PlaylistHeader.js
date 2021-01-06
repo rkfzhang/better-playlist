@@ -5,7 +5,7 @@ const PlaylistHeader = props => {
 
     function play() {
         const songsUris = [];
-        props.playlist.items.tracks.forEach(track => {
+        props.selectedPlaylist.items.tracks.forEach(track => {
             songsUris.push(track.uri);
         });
 
@@ -14,8 +14,8 @@ const PlaylistHeader = props => {
 
     return (
         <div>
-            <h1>{props.playlist.name}</h1>
-            <Button onClick={() => play(props.playlist)}>Play</Button>
+            <h1>{props.selectedPlaylist.name}</h1>
+            <Button onClick={() => play(props.selectedPlaylist)}>Play</Button>
         </div>
     );
 }
