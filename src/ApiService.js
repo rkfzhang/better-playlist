@@ -63,5 +63,67 @@ class ApiService {
             artists: "[]"
         });
     }
+
+    getAlbumTracks(albumId, token, songsUris) {
+        axios(`https://api.spotify.com/v1/albums/${albumId}/tracks`, {
+            method: 'GET',
+            headers: {'Authorization' : 'Bearer ' + token}
+        })
+        .then(apiSearchResults => {
+            apiSearchResults.data.items.forEach(track => {
+                songsUris.push(track.uri);
+            })
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    getArtistTracks(artistId, token, songsUris) {
+        const resultType = 'album,single';
+        const country = 'from_token';
+
+        axios(`https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=${resultType}&country=${country}&limit=50`, {
+            method: 'GET',
+            headers: {'Authorization' : 'Bearer ' + token}
+        })
+        .then(apiSearchResults => {
+            apiSearchResults.data.items.forEach(album => {
+                this.getAlbumTracks(album.id, token, songsUris);
+            })
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    playerTogglePlayPause(isPlaying,token) {
+        if (isPlaying) {
+            axios(`https://api.spotify.com/v1/me/player/pause`, {
+                method: 'PUT',
+                headers: {'Authorization' : 'Bearer ' + token}
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+        else {
+            axios(`https://api.spotify.com/v1/me/player/play`, {
+                method: 'PUT',
+                headers: {'Authorization' : 'Bearer ' + token}
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }
+
+    playerStart(songQueue, deviceId, token) {
+        if (songQueue.length > 0) {
+            axios(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+                method: 'PUT',
+                headers: {'Authorization' : 'Bearer ' + token},
+                data: {'uris' : songQueue}
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }
 }
 export const apiService = new ApiService();

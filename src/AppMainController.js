@@ -13,7 +13,6 @@ const AppMainController = props => {
     const [playlistChanged, setPlaylistChanged] = useState(false);
 
     useEffect(() => {
-        console.log(selectedPlaylist);
         setPlaylistChanged(false);
     }, [playlistChanged]);
     
@@ -32,7 +31,7 @@ const AppMainController = props => {
             <div className='playlist-section'>
                 {playlistChosen() ?
                     <div>
-                        <PlaylistHeader selectedPlaylist={selectedPlaylist} />
+                        <PlaylistHeader selectedPlaylist={selectedPlaylist} setSongQueue={props.setSongQueue} token={props.token}/>
                         <SearchController selectedPlaylist={selectedPlaylist} setSelectedPlaylist={setSelectedPlaylist} token={props.token} 
                             setPlaylistChanged={setPlaylistChanged}/>
                         <PlaylistMain selectedPlaylist={selectedPlaylist} />

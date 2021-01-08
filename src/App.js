@@ -1,7 +1,5 @@
 import './App.css';
-import CollectionList from './Collection/CollectionList';
 import React, { useState, useEffect } from 'react';
-import Playlist from './Collection/Playlist';
 import Login from './Login';
 import { apiService } from './ApiService'
 import InactivePlayer from './Play/InactivePlayer';
@@ -20,15 +18,19 @@ function App() {
     }, []);
 
     /////////////////////////////////////////////////////////////////////////////////////
+    //QUEUE
+    const [songQueue, setSongQueue] = useState([]);
+
+    /////////////////////////////////////////////////////////////////////////////////////
     //PAGE
     return ( 
         <div className="App">
             {token ?
-                <AppMainController token={token} />
+                <AppMainController token={token} setSongQueue={setSongQueue}/>
                 : <Login authorizeUrl={apiService.authorize()}/>
             }
             {token ? 
-                <PlayController token={token} /> 
+                <PlayController token={token} songQueue={songQueue} /> 
                 : <InactivePlayer />
             }
         </div>  

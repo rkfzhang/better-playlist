@@ -18,7 +18,7 @@ const TrackList = props => {
         (<div>
             <h2>Tracks</h2>
                 {tracks.map( (t) => 
-                <Row>
+                <Row key={t.id}>
                     <div className='search-container' onClick={e => addTrack(t)}>
                         {t.album.images.length ? <Image src={t.album.images[t.album.images.length-1].url} rounded /> : ""}
                         <div className='search-name'> 

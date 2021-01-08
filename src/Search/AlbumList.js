@@ -18,7 +18,7 @@ const ArtistList = props => {
         (<div>
             <h2>Albums</h2>
                 {albums.map( (a) => 
-                <Row>
+                <Row key={a.id}>
                     <div className='search-container' onClick={e => addAlbum(a)}>
                         {a.images.length ?<Image src={a.images[2].url}  roundedCircle/> : ""}
                         <div className='search-name'> 

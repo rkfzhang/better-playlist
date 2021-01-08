@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { apiService } from '../ApiService'
 
 const PlayController = props => {
+
+
+    /////////////////////////////////////////////////////////////////////////////////////
+    //PLAYER SETUP
+    const [deviceId, setDeviceId] = useState("");
 
     useEffect(() => {
         const playerScript = document.createElement("script");
         playerScript.src = "https://sdk.scdn.co/spotify-player.js";
         playerScript.async = true;
-        
         document.body.appendChild(playerScript);
-
-    });
+    },[]);
 
     window.onSpotifyWebPlaybackSDKReady = () => {
         const player = new window.Spotify.Player({
@@ -28,6 +32,7 @@ const PlayController = props => {
         // Ready
         player.addListener('ready', ({ device_id }) => {
             console.log('Ready with Device ID', device_id);
+            setDeviceId(device_id);
         });
 
         // Not Ready
@@ -39,9 +44,30 @@ const PlayController = props => {
         player.connect();
     };
 
+    /////////////////////////////////////////////////////////////////////////////////////
+    //PLAYER CONTROLS
+    const [isPLaying, setIsPLaying] = useState(false);
+
+    function setPlaying() {
+        apiService.playerTogglePlayPause(isPLaying,props.token);
+        if (isPLaying) {
+            setIsPLaying(false);
+        }
+        else {
+            setIsPLaying(true);
+        }
+    };
+
+    useEffect(() => {
+        console.log(props.songQueue);
+        apiService.playerStart(props.songQueue,deviceId,props.token);
+        setIsPLaying(true);
+    }, [props.songQueue]);
 
     return (
-        <div className='player'>PLAYER Active</div>
+        <div className='player'>
+            <div onClick={() => setPlaying()}>{isPLaying ? 'PAUSE' : 'PLAY'}</div>
+        </div>
     );
 }
 

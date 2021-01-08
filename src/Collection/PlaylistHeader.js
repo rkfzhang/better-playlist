@@ -1,15 +1,26 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { apiService } from '../ApiService'
 
 const PlaylistHeader = props => {
 
     function play() {
-        const songsUris = [];
+        var songsUris = [];
+
         props.selectedPlaylist.items.tracks.forEach(track => {
             songsUris.push(track.uri);
         });
 
-        console.log(songsUris);
+        props.selectedPlaylist.items.albums.forEach(album => {
+            apiService.getAlbumTracks(album.id, props.token, songsUris);
+        });
+
+        props.selectedPlaylist.items.artists.forEach(artist => {
+            apiService.getArtistTracks(artist.id, props.token, songsUris);
+        });
+
+        console.log(props.token);
+        props.setSongQueue(songsUris);
     }
 
     return (

@@ -18,7 +18,7 @@ const ArtistList = props => {
         (<div>
             <h2>Artists</h2>
                 {artists.map( (a) => 
-                <Row>
+                <Row key={a.id}>
                     <div className='search-container' onClick={e => addArtists(a)}>
                         {a.images.length ? <Image className='artist-image' src={a.images[a.images.length-1].url} /> : "" }
                         <div className='search-name'> 
