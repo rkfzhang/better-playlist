@@ -1,27 +1,43 @@
 import axios from 'axios';
 
+function authorizeLink() {
+    const client_id = '012ed053ecba4a58874cb8a2e753225a';
+    const redirect_uri = 'http://localhost:3000/';
+    const scopes = [
+        "user-read-currently-playing",
+        "user-read-recently-played",
+        "user-read-playback-state",
+        "user-top-read",
+        "user-modify-playback-state",
+        "streaming", 
+        "user-read-email", 
+        "user-read-private"
+    ];
+    const authorizeEndpoint = 'https://accounts.spotify.com/authorize';
+
+    const authorizeLink = `${authorizeEndpoint}?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scopes.join(
+        "%20"
+      )}&response_type=token&show_dialog=true`;
+
+    return authorizeLink
+}
+
+function reauthorize(error) {
+    if(error.response.data.error.message === "The access token expired") {
+        window.location.href = authorizeLink();
+    }
+}
+
 class ApiService {
 
     authorize() {
-        const client_id = '012ed053ecba4a58874cb8a2e753225a';
-        const redirect_uri = 'http://localhost:3000/';
-        const scopes = [
-            "user-read-currently-playing",
-            "user-read-recently-played",
-            "user-read-playback-state",
-            "user-top-read",
-            "user-modify-playback-state",
-            "streaming", 
-            "user-read-email", 
-            "user-read-private"
-        ];
-        const authorizeEndpoint = 'https://accounts.spotify.com/authorize';
+        return authorizeLink();
+    }
 
-        const authorizeLink = `${authorizeEndpoint}?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scopes.join(
-            "%20"
-          )}&response_type=token&show_dialog=true`;
-
-        return authorizeLink
+    reauthorize(error) {
+        if(error.message === "The access token expired") {
+            window.location.href = this.authorize();
+        }
     }
 
     getToken(url) {
@@ -50,6 +66,7 @@ class ApiService {
                 });
             })
             .catch(function (error) {
+                reauthorize(error);
                 setSearchResult({
                     tracks: "[]",
                     albums: "[]",
@@ -75,6 +92,7 @@ class ApiService {
             })
         }).catch(function (error) {
             console.log(error);
+            reauthorize(error);
         });
     }
 
@@ -92,6 +110,18 @@ class ApiService {
             })
         }).catch(function (error) {
             console.log(error);
+            reauthorize(error);
+        });
+    }
+
+    playerSelectDevice(deviceId, token) {
+        axios(`https://api.spotify.com/v1/me/player`, {
+            method: 'PUT',
+            headers: {'Authorization' : 'Bearer ' + token},
+            data: {'device_ids' :  [deviceId] }
+        }).catch(function (error) {
+            console.log(error);
+            reauthorize(error);
         });
     }
 
@@ -102,6 +132,7 @@ class ApiService {
                 headers: {'Authorization' : 'Bearer ' + token}
             }).catch(function (error) {
                 console.log(error);
+                reauthorize(error);
             });
         }
         else {
@@ -109,21 +140,77 @@ class ApiService {
                 method: 'PUT',
                 headers: {'Authorization' : 'Bearer ' + token}
             }).catch(function (error) {
-                console.log(error);
+                console.log(error.response);
+                reauthorize(error);
             });
         }
     }
 
+
+    playerStop(token) {
+        axios(`https://api.spotify.com/v1/me/player/pause`, {
+            method: 'PUT',
+            headers: {'Authorization' : 'Bearer ' + token}
+        }).catch(function (error) {
+            console.log(error);
+            reauthorize(error);
+        });
+    }
+
     playerStart(songQueue, deviceId, token) {
-        if (songQueue.length > 0) {
+        if (songQueue !== []) {
+            console.log(songQueue.length);
             axios(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
                 method: 'PUT',
                 headers: {'Authorization' : 'Bearer ' + token},
                 data: {'uris' : songQueue}
+            }).then(() => {
+                this.playerShuffle(token);
             }).catch(function (error) {
                 console.log(error);
+                reauthorize(error);
             });
         }
+    }
+
+    playerShuffle(token) {
+        axios(`https://api.spotify.com/v1/me/player/shuffle?state=true`, {
+            method: 'PUT',
+            headers: {'Authorization' : 'Bearer ' + token},
+        }).catch(function (error) {
+            console.log(error);
+            reauthorize(error);
+        });
+    }
+
+    playerPrevious(token) {
+        axios(`https://api.spotify.com/v1/me/player/previous`, {
+            method: 'POST',
+            headers: {'Authorization' : 'Bearer ' + token},
+        }).catch(function (error) {
+            console.log(error);
+            reauthorize(error);
+        });
+    }
+
+    playerNext(token) {
+        axios(`https://api.spotify.com/v1/me/player/next`, {
+            method: 'POST',
+            headers: {'Authorization' : 'Bearer ' + token},
+        }).catch(function (error) {
+            console.log(error);
+            reauthorize(error);
+        });
+    }
+
+    playerVolume(volume, token) {
+        axios(`https://api.spotify.com/v1/me/player/volume?volume_percent=${volume}`, {
+            method: 'PUT',
+            headers: {'Authorization' : 'Bearer ' + token},
+        }).catch(function (error) {
+            console.log(error);
+            reauthorize(error);
+        });
     }
 }
 export const apiService = new ApiService();

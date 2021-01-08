@@ -3,6 +3,7 @@ import CollectionList from './Collection/CollectionList';
 import PlaylistHeader from './Collection/PlaylistHeader';
 import PlaylistMain from './Collection/PlaylistMain';
 import SearchController from './Search/SearchController';
+import { apiService } from './ApiService'
 
 const AppMainController = props => {
 
@@ -11,13 +12,31 @@ const AppMainController = props => {
 
     const [selectedPlaylist, setSelectedPlaylist] = useState();
     const [playlistChanged, setPlaylistChanged] = useState(false);
+    const [currentPlaylist, setCurrentPlaylist] = useState();
 
     useEffect(() => {
         setPlaylistChanged(false);
+        getCurrentPlaylist();
     }, [playlistChanged]);
     
     function playlistChosen() {
         return (selectedPlaylist !== undefined || selectedPlaylist);
+    }
+
+    function getCurrentPlaylist() {
+        if (selectedPlaylist){
+            var songsUris = [];
+            selectedPlaylist.items.tracks.forEach(track => {
+                songsUris.push(track.uri);
+            });
+            selectedPlaylist.items.albums.forEach(album => {
+                apiService.getAlbumTracks(album.id, props.token, songsUris);
+            });
+            selectedPlaylist.items.artists.forEach(artist => {
+                apiService.getArtistTracks(artist.id, props.token, songsUris);
+            });
+            setCurrentPlaylist(songsUris);
+        }
     }
 
 
@@ -31,7 +50,7 @@ const AppMainController = props => {
             <div className='playlist-section'>
                 {playlistChosen() ?
                     <div>
-                        <PlaylistHeader selectedPlaylist={selectedPlaylist} setSongQueue={props.setSongQueue} token={props.token}/>
+                        <PlaylistHeader selectedPlaylist={selectedPlaylist} setSongQueue={props.setSongQueue} token={props.token} currentPlaylist={currentPlaylist}/>
                         <SearchController selectedPlaylist={selectedPlaylist} setSelectedPlaylist={setSelectedPlaylist} token={props.token} 
                             setPlaylistChanged={setPlaylistChanged}/>
                         <PlaylistMain selectedPlaylist={selectedPlaylist} />
