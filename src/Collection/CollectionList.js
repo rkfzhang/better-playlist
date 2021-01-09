@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Alert } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
-
+import ls from 'local-storage'
 
 const CollectionList = props => {
 
     const [add, setAdd] = useState(false);
     const [collection, setCollection] = useState([]);
     const [playlistName, setName] = useState("");
+
+    useEffect(() => {
+        if(ls.get('collection')) {
+            setCollection(ls.get('collection'));
+        }
+    },[]);
+
+    useEffect(() => {
+        ls.set('collection', collection);
+    },[props.playlistChanged]);
     
     function addNewPlaylist() {
         if (playlistName) {
@@ -34,7 +44,7 @@ const CollectionList = props => {
     function deletePlaylist(index) {
         var newCollection = [];
         collection.forEach(playlist => {
-            if (playlist.index != index) {
+            if (playlist.index !== index) {
                 if (playlist.index > index) {
                     playlist.index -= 1;
                 }

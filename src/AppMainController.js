@@ -5,6 +5,7 @@ import PlaylistMain from './Collection/PlaylistMain';
 import SearchController from './Search/SearchController';
 import { apiService } from './ApiService'
 
+
 const AppMainController = props => {
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +74,7 @@ const AppMainController = props => {
 
     return (
         <div className='App-Main'>
-            <CollectionList setSelectedPlaylist={setSelectedPlaylist} />
+            <CollectionList setSelectedPlaylist={setSelectedPlaylist} playlistChanged={playlistChanged}/>
             <div className='playlist-section'>
                 {playlistChosen() ?
                     <div>
