@@ -59,7 +59,7 @@ const CollectionList = props => {
 
                         <ContextMenu id={d.name+'-'+d.index}>
                             <MenuItem onClick={() => deletePlaylist(d.index)}>
-                                Delete
+                                Remove
                             </MenuItem>
                         </ContextMenu>
                     </div>

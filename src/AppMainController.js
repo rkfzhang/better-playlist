@@ -41,7 +41,34 @@ const AppMainController = props => {
 
 
     /////////////////////////////////////////////////////////////////////////////////////
-    //SEARCH
+    //DELETE
+
+    function removeTrack(index) {
+        var newPlaylist = selectedPlaylist;
+        var newTracks = newPlaylist.items.tracks;
+        newTracks.splice(index,1);
+        newPlaylist.items.tracks = newTracks;
+        setSelectedPlaylist(newPlaylist);
+        setPlaylistChanged(true);
+    }
+
+    function removeAlbum(index) {
+        var newPlaylist = selectedPlaylist;
+        var newAlbums = newPlaylist.items.albums;
+        newAlbums.splice(index,1);
+        newPlaylist.items.albums = newAlbums;
+        setSelectedPlaylist(newPlaylist);
+        setPlaylistChanged(true);
+    }
+
+    function removeArtist(index) {
+        var newPlaylist = selectedPlaylist;
+        var newArtists = newPlaylist.items.artists;
+        newArtists.splice(index,1);
+        newPlaylist.items.artists = newArtists;
+        setSelectedPlaylist(newPlaylist);
+        setPlaylistChanged(true);
+    }
     
 
     return (
@@ -53,7 +80,7 @@ const AppMainController = props => {
                         <PlaylistHeader selectedPlaylist={selectedPlaylist} setSongQueue={props.setSongQueue} token={props.token} currentPlaylist={currentPlaylist}/>
                         <SearchController selectedPlaylist={selectedPlaylist} setSelectedPlaylist={setSelectedPlaylist} token={props.token} 
                             setPlaylistChanged={setPlaylistChanged}/>
-                        <PlaylistMain selectedPlaylist={selectedPlaylist} />
+                        <PlaylistMain selectedPlaylist={selectedPlaylist} removeTrack={removeTrack} removeAlbum={removeAlbum} removeArtist={removeArtist}/>
                     </div>
                     :
                     <div>
