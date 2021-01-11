@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {Image, Row } from 'react-bootstrap';
 
 const TrackList = props => {

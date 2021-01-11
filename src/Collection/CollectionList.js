@@ -39,6 +39,7 @@ const CollectionList = props => {
 
     function changePlaylist(newSelectionIndex) {
         props.setSelectedPlaylist(collection[newSelectionIndex]);
+        props.setPlaylistChanged(true);
     }
 
     function deletePlaylist(index) {
@@ -53,13 +54,14 @@ const CollectionList = props => {
         });
 
         setCollection(newCollection);
-        console.log(collection);
+        ls.set('collection', newCollection);
     }
 
 
     return (
         <div className='collection-section'>
             <h2>Your Collection</h2>
+            <hr className='line-break'/>
             <div>
                 {collection.map( (d) => 
                     <div key={d.index}>
@@ -80,7 +82,7 @@ const CollectionList = props => {
                     <Form.Group>
                         <Form.Control value={playlistName} onChange={e => setName(e.target.value)}/>
                     </Form.Group>
-                    <div>
+                    <div className='collection-button'>
                         <Button onClick={addNewPlaylist}>Add</Button>
                         <Button onClick={() => {setAdd(!add); setName('');}}>Cancel</Button>
                     </div>

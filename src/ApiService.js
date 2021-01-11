@@ -114,6 +114,25 @@ class ApiService {
         });
     }
 
+    getArtistAlbums(artistId, token, albums) {
+        const resultType = 'album,single';
+        const country = 'from_token';
+
+        axios(`https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=${resultType}&country=${country}&limit=50`, {
+            method: 'GET',
+            headers: {'Authorization' : 'Bearer ' + token}
+        })
+        .then(apiSearchResults => {
+            console.log(apiSearchResults);
+            apiSearchResults.data.items.forEach(album => {
+                albums.push(album);
+            });
+        }).catch(function (error) {
+            console.log(error);
+            reauthorize(error);
+        });
+    }
+
     playerSelectDevice(deviceId, token) {
         axios(`https://api.spotify.com/v1/me/player`, {
             method: 'PUT',
@@ -159,7 +178,6 @@ class ApiService {
 
     playerStart(songQueue, deviceId, token) {
         if (songQueue !== []) {
-            console.log(songQueue.length);
             axios(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
                 method: 'PUT',
                 headers: {'Authorization' : 'Bearer ' + token},

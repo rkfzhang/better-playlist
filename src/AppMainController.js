@@ -74,18 +74,19 @@ const AppMainController = props => {
 
     return (
         <div className='App-Main'>
-            <CollectionList setSelectedPlaylist={setSelectedPlaylist} playlistChanged={playlistChanged}/>
+            <CollectionList setSelectedPlaylist={setSelectedPlaylist} playlistChanged={playlistChanged} setPlaylistChanged={setPlaylistChanged}/>
             <div className='playlist-section'>
                 {playlistChosen() ?
                     <div>
                         <PlaylistHeader selectedPlaylist={selectedPlaylist} setSongQueue={props.setSongQueue} token={props.token} currentPlaylist={currentPlaylist}/>
                         <SearchController selectedPlaylist={selectedPlaylist} setSelectedPlaylist={setSelectedPlaylist} token={props.token} 
                             setPlaylistChanged={setPlaylistChanged}/>
-                        <PlaylistMain selectedPlaylist={selectedPlaylist} removeTrack={removeTrack} removeAlbum={removeAlbum} removeArtist={removeArtist}/>
+                        <PlaylistMain selectedPlaylist={selectedPlaylist} removeTrack={removeTrack} removeAlbum={removeAlbum} removeArtist={removeArtist} 
+                            token={props.token} />
                     </div>
                     :
                     <div>
-                        <h2>No playlist selected</h2>
+                        <h2 className='playlist-none'>No playlist selected</h2>
                     </div>
                 }
             </div>

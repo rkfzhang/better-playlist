@@ -14,6 +14,15 @@
   grid-template-columns: 1fr 3fr;
 }
 
+.login {
+  grid-column: 1 / 3;
+  grid-row: 1 / 3 ;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .App-Main {
   grid-column: 1 / 3;
   grid-row: 1 / 2 ;
@@ -24,26 +33,52 @@
 
 .player {
   background-color: rgb(51, 51, 51);
-  color: red ;
+  color: white ;
   grid-column: 1 / 3;
   grid-row: 2 / 3 ;
   display: grid;
-  grid-template-columns:1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns:2fr 1fr 2fr;
   align-items: center;
+}
+.player-buttons *{
+  margin: 7%;
 }
 
 .player-volume {
-  margin: 20px;
+  margin-left: 40%;
+  margin-right: 20%;
 }
 
 .collection-section {
   text-align: left;
-  margin-left: 20px;
+  margin: 10%;
+}
+
+.collection-button *{
+  margin-right: 10px;
 }
 
 .playlist-section {
   background-color: rgb(17, 17, 17);
   height: 100% ;
+}
+
+.playlist-main {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 2%;
+  margin-top: 0px;
+}
+
+.playlist-main h3{
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  margin-left: 2%;
+  margin-right: 33%;
+  margin-bottom: 0%;
 }
 
 .search-results {
@@ -106,4 +141,45 @@
   pointer-events: none;
   text-align: center;
   transition: opacity 250ms ease !important;
+}
+
+.playlist-header{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 2%;
+}
+
+.playlist-header h1{
+  margin-bottom: 20px;
+}
+
+.playlist-none {
+  margin-top: 25%;
+}
+
+.playlist-track {
+  display: grid;
+  grid-template-columns: 3fr 2fr 2fr;
+  justify-items: start;
+  text-align: left;
+  width: 120vh;
+}
+
+.playlist-album {
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  justify-items: start;
+  width: 120vh;
+}
+
+.playlist-artist {
+  width: 120vh;
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  justify-items: start;
+}
+
+.line-break {
+  background-color: rgb(126, 126, 126);
 }

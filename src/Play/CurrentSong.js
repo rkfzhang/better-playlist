@@ -15,7 +15,7 @@ const CurrentSong = props => {
             <p>{props.currentlyPlayed.name}</p>
             <p>{getArtists()}</p>
         </div>
-        : ""
+        : <div></div>
     );
 }
 

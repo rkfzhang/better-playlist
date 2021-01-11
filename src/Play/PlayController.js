@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Button } from 'react';
 import { apiService } from '../ApiService'
 import CurrentSong from './CurrentSong';
 import VolumeController from './VolumeController';
+import { PlayerIcon } from 'react-player-controls'
 
 const PlayController = props => {
 
 
     /////////////////////////////////////////////////////////////////////////////////////
     //PLAYER SETUP
-    const [deviceId, setDeviceId] = useState("");
+
+    const [deviceId, setDeviceId] = useState(); 
 
     useEffect(() => {
         const playerScript = document.createElement("script");
@@ -33,15 +35,15 @@ const PlayController = props => {
             console.log(state);
             if (state !== null) {
                 setIsPLaying(!state.paused);
+                setCurrentlyPlayed(state.track_window.current_track);
             }
-            setCurrentlyPlayed(state.track_window.current_track);
          });
 
         // Ready
         player.addListener('ready', ({ device_id }) => {
             console.log('Ready with Device ID', device_id);
-            setDeviceId(device_id);
             apiService.playerSelectDevice(device_id,props.token);
+            setDeviceId(device_id);
         });
 
         // Not Ready
@@ -76,6 +78,7 @@ const PlayController = props => {
         if (props.songQueue !== []) {
             apiService.playerStop(props.token);
         }
+        apiService.playerStart(props.songQueue,deviceId,props.token)
     }, [props.songQueue]);
 
     useEffect(() => {
@@ -85,9 +88,14 @@ const PlayController = props => {
     return (
         <div className='player'>
             <CurrentSong currentlyPlayed={currentlyPlayed} />
-            <div onClick={() => previous()}>Prev</div>
-            <div onClick={() => setPlaying()}>{isPLaying ? 'PAUSE' : 'PLAY'}</div>
-            <div onClick={() => next()}>Next</div>
+            <div className='player-buttons'>
+                <PlayerIcon.Previous width={32} height={32} onClick={() => previous()}/>
+                {isPLaying ? 
+                    <PlayerIcon.Pause width={32} height={32} onClick={() => setPlaying()}/> : 
+                    <PlayerIcon.Play width={32} height={32} onClick={() => setPlaying()}/>
+                }
+                <PlayerIcon.Next width={32} height={32} onClick={() => next()}/>
+            </div>
             <VolumeController setVolume={setVolume}/>
         </div>
     );

@@ -7,13 +7,14 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 const PlaylistMain = props => {
 
     return (
-        <div>
+        <div className='playlist-main'>
             {props.selectedPlaylist.items.tracks.length ? <h3>Songs</h3> : ""}
             {props.selectedPlaylist.items.tracks.map(
                 (currentValue, index) => 
-                <div>
+                <div key={currentValue.name + '-' + index}>
                     <ContextMenuTrigger id={currentValue.name + '-' + index}>
                         <Track track={currentValue}/>
+                        <hr className='line-break' />
                     </ContextMenuTrigger>
 
                     <ContextMenu id={currentValue.name + '-' + index}>
@@ -26,9 +27,10 @@ const PlaylistMain = props => {
             {props.selectedPlaylist.items.albums.length ? <h3>Albums</h3> : ""}
             {props.selectedPlaylist.items.albums.map(
                 (currentValue, index) => 
-                <div>
+                <div key={currentValue.name + '-' + index}>
                     <ContextMenuTrigger id={currentValue.name + '-' + index}>
                         <Album album={currentValue}/>
+                        <hr className='line-break' />
                     </ContextMenuTrigger>
 
                     <ContextMenu id={currentValue.name + '-' + index}>
@@ -41,9 +43,10 @@ const PlaylistMain = props => {
             {props.selectedPlaylist.items.artists.length ? <h3>Artists</h3> : ""}
             {props.selectedPlaylist.items.artists.map(
                 (currentValue, index) => 
-                <div>
+                <div key={currentValue.name + '-' + index}>
                     <ContextMenuTrigger id={currentValue.name + '-' + index}>
-                        <Artist artist={currentValue}/>
+                        <Artist artist={currentValue} token={props.token}/>
+                        <hr className='line-break' />
                     </ContextMenuTrigger>
 
                     <ContextMenu id={currentValue.name + '-' + index}>

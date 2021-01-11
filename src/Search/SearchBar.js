@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 const SearchBar = props => {
 
     return (
-        <div>
+        <div className='search-bar'>
             <Form.Group>
                 <Form.Control placeholder="Search" value={props.search} onChange={e => props.setSearchQuery(e.target.value)}/>
             </Form.Group>
