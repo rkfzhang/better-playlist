@@ -16,29 +16,31 @@ const AppMainController = props => {
     const [currentPlaylist, setCurrentPlaylist] = useState();
 
     useEffect(() => {
+        function getCurrentPlaylist() {
+            if (selectedPlaylist){
+                var songsUris = [];
+                selectedPlaylist.items.tracks.forEach(track => {
+                    songsUris.push(track.uri);
+                });
+                selectedPlaylist.items.albums.forEach(album => {
+                    apiService.getAlbumTracks(album.id, props.token, songsUris);
+                });
+                selectedPlaylist.items.artists.forEach(artist => {
+                    apiService.getArtistTracks(artist.id, props.token, songsUris);
+                });
+                setCurrentPlaylist(songsUris);
+            }
+        }
+
         setPlaylistChanged(false);
         getCurrentPlaylist();
-    }, [playlistChanged]);
+    }, [playlistChanged, props.token, selectedPlaylist]);
     
     function playlistChosen() {
         return (selectedPlaylist !== undefined || selectedPlaylist);
     }
 
-    function getCurrentPlaylist() {
-        if (selectedPlaylist){
-            var songsUris = [];
-            selectedPlaylist.items.tracks.forEach(track => {
-                songsUris.push(track.uri);
-            });
-            selectedPlaylist.items.albums.forEach(album => {
-                apiService.getAlbumTracks(album.id, props.token, songsUris);
-            });
-            selectedPlaylist.items.artists.forEach(artist => {
-                apiService.getArtistTracks(artist.id, props.token, songsUris);
-            });
-            setCurrentPlaylist(songsUris);
-        }
-    }
+    
 
 
     /////////////////////////////////////////////////////////////////////////////////////

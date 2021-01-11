@@ -18,7 +18,7 @@ const CollectionList = props => {
 
     useEffect(() => {
         ls.set('collection', collection);
-    },[props.playlistChanged]);
+    },[props.playlistChanged, collection]);
     
     function addNewPlaylist() {
         if (playlistName) {

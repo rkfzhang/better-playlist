@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Button } from 'react';
+import React, { useEffect, useState } from 'react';
 import { apiService } from '../ApiService'
 import CurrentSong from './CurrentSong';
 import VolumeController from './VolumeController';
@@ -77,13 +77,13 @@ const PlayController = props => {
     useEffect(() => {
         if (props.songQueue !== []) {
             apiService.playerStop(props.token);
+            apiService.playerStart(props.songQueue,deviceId,props.token);
         }
-        apiService.playerStart(props.songQueue,deviceId,props.token)
-    }, [props.songQueue]);
+    }, [props.songQueue, deviceId, props.token]);
 
     useEffect(() => {
         apiService.playerVolume(volume, props.token);
-    }, [volume]);
+    }, [volume, props.token]);
 
     return (
         <div className='player'>
