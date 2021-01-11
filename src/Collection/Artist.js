@@ -1,6 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
-import { apiService } from '../ApiService';
+import React from 'react';
 
 const Artist = props => {
 
