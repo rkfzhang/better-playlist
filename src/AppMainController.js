@@ -40,6 +40,8 @@ const AppMainController = props => {
         return (selectedPlaylist !== undefined || selectedPlaylist);
     }
 
+    
+
 
     /////////////////////////////////////////////////////////////////////////////////////
     //DELETE
