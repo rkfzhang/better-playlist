@@ -13,7 +13,7 @@ const PlaylistHeader = props => {
         <div className='playlist-header'>
             <h1>{props.selectedPlaylist.name}</h1>
             <Button onClick={() => play(props.selectedPlaylist)} variant="success" >Play</Button>
-            <p><small>Please wait ~30s before hitting play to compile playlist</small></p>
+            <p><small>Please wait ~30s before hitting play for app to compile playlist and identify any changes made</small></p>
         </div>
     );
 }
