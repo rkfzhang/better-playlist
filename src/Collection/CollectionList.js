@@ -34,6 +34,8 @@ const CollectionList = props => {
             setCollection([...collection, newPLaylist]);
             setAdd(false);
             setName("");
+            props.setSelectedPlaylist(newPLaylist);
+            props.setPlaylistChanged(true);
         }
     }
 

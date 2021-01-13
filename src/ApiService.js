@@ -2,7 +2,7 @@ import axios from 'axios';
 
 function authorizeLink() {
     const client_id = '012ed053ecba4a58874cb8a2e753225a';
-    const redirect_uri = 'http://sbplaylist.me/';
+    const redirect_uri = 'https://rkfzhang.github.io/better-playlist/';
     const scopes = [
         "user-read-currently-playing",
         "user-read-recently-played",
