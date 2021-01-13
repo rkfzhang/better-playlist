@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.97a03cf8.chunk.css",
-    "main.js": "/static/js/main.01d8773f.chunk.js",
-    "main.js.map": "/static/js/main.01d8773f.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.20323ede.js",
-    "runtime-main.js.map": "/static/js/runtime-main.20323ede.js.map",
-    "static/css/2.6bdb8584.chunk.css": "/static/css/2.6bdb8584.chunk.css",
-    "static/js/2.61376d2b.chunk.js": "/static/js/2.61376d2b.chunk.js",
-    "static/js/2.61376d2b.chunk.js.map": "/static/js/2.61376d2b.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.6bdb8584.chunk.css.map": "/static/css/2.6bdb8584.chunk.css.map",
-    "static/css/main.97a03cf8.chunk.css.map": "/static/css/main.97a03cf8.chunk.css.map",
-    "static/js/2.61376d2b.chunk.js.LICENSE.txt": "/static/js/2.61376d2b.chunk.js.LICENSE.txt",
-    "static/media/spotify-logo.522b5e00.jpg": "/static/media/spotify-logo.522b5e00.jpg"
+    "main.css": "/better-playlist/static/css/main.97a03cf8.chunk.css",
+    "main.js": "/better-playlist/static/js/main.dea89907.chunk.js",
+    "main.js.map": "/better-playlist/static/js/main.dea89907.chunk.js.map",
+    "runtime-main.js": "/better-playlist/static/js/runtime-main.1295c401.js",
+    "runtime-main.js.map": "/better-playlist/static/js/runtime-main.1295c401.js.map",
+    "static/css/2.6bdb8584.chunk.css": "/better-playlist/static/css/2.6bdb8584.chunk.css",
+    "static/js/2.61376d2b.chunk.js": "/better-playlist/static/js/2.61376d2b.chunk.js",
+    "static/js/2.61376d2b.chunk.js.map": "/better-playlist/static/js/2.61376d2b.chunk.js.map",
+    "index.html": "/better-playlist/index.html",
+    "static/css/2.6bdb8584.chunk.css.map": "/better-playlist/static/css/2.6bdb8584.chunk.css.map",
+    "static/css/main.97a03cf8.chunk.css.map": "/better-playlist/static/css/main.97a03cf8.chunk.css.map",
+    "static/js/2.61376d2b.chunk.js.LICENSE.txt": "/better-playlist/static/js/2.61376d2b.chunk.js.LICENSE.txt",
+    "static/media/spotify-logo.522b5e00.jpg": "/better-playlist/static/media/spotify-logo.522b5e00.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.20323ede.js",
+    "static/js/runtime-main.1295c401.js",
     "static/css/2.6bdb8584.chunk.css",
     "static/js/2.61376d2b.chunk.js",
     "static/css/main.97a03cf8.chunk.css",
-    "static/js/main.01d8773f.chunk.js"
+    "static/js/main.dea89907.chunk.js"
   ]
 }
